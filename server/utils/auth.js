@@ -5,6 +5,12 @@ const secret = 'mysecretsshhhhh';
 const expiration = '24h';
 
 module.exports = {
+  
+  signToken: function({ username, email, _id }) {
+    const payload = { username, email, _id };
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  },
+
   // function for our authenticated routes
   authMiddleware: function (req, res, next) {
     // allows token to be sent via  req.query or headers
@@ -12,7 +18,10 @@ module.exports = {
 
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token
+      .split(' ')
+      .pop()
+      .trim();
     }
 
     if (!token) {
