@@ -23,10 +23,12 @@ const resolvers = {
             if(!user) {
                 throw new AuthenticationError('Incorrect username');
             }
-            const user = await User.findOne({ email });
+
+            const Email = await User.findOne({ email });
             if(!user) {
                 throw new AuthenticationError('Incorrect email');
             }
+            
             const correctPw = await User.isCorrectPassword(password);
             if(!correctPw) {
                 throw new AuthenticationError('Incorrect password');
