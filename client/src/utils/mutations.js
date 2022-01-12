@@ -18,6 +18,7 @@ export const ADD_USER = gql`
             user{
                 _id
                 username
+                email
             }
         }
     }
@@ -45,7 +46,7 @@ export const REMOVE_BOOK = gql`
             title
             image
             link
-            }
+            
         }
     }
 `;
